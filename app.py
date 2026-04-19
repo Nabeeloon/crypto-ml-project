@@ -10,14 +10,18 @@ from ta.momentum import RSIIndicator
 from ta.trend import MACD as MACDIndicator
 from newsapi import NewsApiClient
 from textblob import TextBlob
-from dotenv import load_dotenv
 
-BASE_DIR = "/Users/myapple/crypto-ml-project"
-load_dotenv(os.path.join(BASE_DIR, ".env"))
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 model  = joblib.load(os.path.join(BASE_DIR, "crypto_model.pkl"))
 scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
+
+try:
+    NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
+except:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
+    NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 COIN_NAMES = {
     "BTC-USD": "Bitcoin",
