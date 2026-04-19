@@ -5,3 +5,7 @@ ta
 pandas
 numpy
 joblib
+matplotlib
+newsapi-python
+textblob
+python-dotenv
